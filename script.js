@@ -159,7 +159,7 @@ function setMinSectionHeight() {
 			if(index !== 0) {
 				$(this).css("margin-top", "-" + cardHeight + "px");
 				if(index === 12 || (window.location.href.indexOf("tutorial3") !== -1 && index === 2) || (window.location.href.indexOf("tutorial4") !== -1 && index === 2)) {
-					$(this).draggable({ containment: "body", scroll: false });
+					//$(this).draggable({ containment: "body", scroll: false });
 				}
 			}
 		});
@@ -296,28 +296,33 @@ function canClick(card) {
 	var ret = false;
 	var clickedValue = parseInt(card.attr("value").split('|')[0]);
 	var clickedSuit = card.attr("value").split('|')[1];
-	$(".cardSection .card:last-child").each(function() {
-		var value = parseInt($(this).attr("value").split('|')[0]);
-		var suit = $(this).attr("value").split('|')[1];
-		if(value !== clickedValue || suit !== clickedSuit) {
-			if(suit === clickedSuit && value > clickedValue) {
-				if(window.location.href.indexOf("tutorial2") !== -1) {
-					var newValue = value === 1 ? "Ace" : value === 11 ? "Jack" : value === 12 ? "Queen" : value === 13 ? "King" : value;
-					var newClickedValue = clickedValue === 1 ? "Ace" : clickedValue === 11 ? "Jack" : clickedValue === 12 ? "Queen" : clickedValue === 13 ? "King" : clickedValue;
-					$("#instruction2").text("Great job. The " + newValue + " of " + suit + " cancelled the " + newClickedValue + " of " + clickedSuit);
-					$("#instruction2").show();
-					$('html, body').animate({
-						scrollTop: $("#instruction2").offset().top
-					}, 2000);
+	if(isNaN(clickedValue)) {
+		ret = false;
+	} else {
+		$(".cardSection .card:last-child").each(function() {
+			var value = parseInt($(this).attr("value").split('|')[0]);
+			var suit = $(this).attr("value").split('|')[1];
+			if(value !== clickedValue || suit !== clickedSuit) {
+				if(suit === clickedSuit && value > clickedValue) {
+					if(window.location.href.indexOf("tutorial2") !== -1) {
+						var newValue = value === 1 ? "Ace" : value === 11 ? "Jack" : value === 12 ? "Queen" : value === 13 ? "King" : value;
+						var newClickedValue = clickedValue === 1 ? "Ace" : clickedValue === 11 ? "Jack" : clickedValue === 12 ? "Queen" : clickedValue === 13 ? "King" : clickedValue;
+						$("#instruction2").text("Great job. The " + newValue + " of " + suit + " cancelled the " + newClickedValue + " of " + clickedSuit);
+						$("#instruction2").show();
+						$('html, body').animate({
+							scrollTop: $("#instruction2").offset().top
+						}, 2000);
+					}
+					ret = true;
 				}
-				ret = true;
 			}
+		});
+		if(ret === false && freeDiscards > 0 && clickedValue !== 13) {
+			usingFreeDiscard = true;
+			ret = true;
 		}
-	});
-	if(ret === false && freeDiscards > 0 && clickedValue !== 13) {
-		usingFreeDiscard = true;
-		ret = true;
 	}
+	
 	return ret;
 }
 
