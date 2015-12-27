@@ -22,50 +22,122 @@ $(document).ready(function() {
 	$("#deck").click(function() {
 		draw();
 	});
-	$( "body" ).droppable({
-		drop: function( event, ui ) {
-			ui.draggable.css("top", "0px");
-			ui.draggable.css("left", "0px");
-		}
-    });
-	$( ".cardSection" ).droppable({
-		drop: function( event, ui ) {
-			var sectionDragFrom = parseInt(ui.draggable.parent().attr("id").replace("section","")) - 1;
-			var sectionDragTo = parseInt($(this).attr("id").replace("section","")) - 1;
-			if(sectionDragFrom === sectionDragTo) {
-				clickCard(ui.draggable);
-				return;
-			}
+	
+	interact('.card')
+  .draggable({
+    // enable inertial throwing
+    inertia: true,
+    // keep the element within the area of it's parent
+    restrict: {
+      restriction: "parent",
+      endOnly: true,
+      elementRect: { top: 0, left: 0, bottom: 1, right: 1 }
+    },
+    // enable autoScroll
+    autoScroll: true,
+
+    // call this function on every dragmove event
+    onmove: dragMoveListener,
+    // call this function on every dragend event
+    onend: function (event) {
+      var textEl = event.target.querySelector('p');
+
+      textEl && (textEl.textContent =
+        'moved a distance of '
+        + (Math.sqrt(event.dx * event.dx +
+                     event.dy * event.dy)|0) + 'px');
+    }
+  });
+	
+
+	// enable draggables to be dropped into this
+	interact('.cardSection').dropzone({
+	  // only accept elements matching this CSS selector
+	  accept: '.card',
+	  // Require a 75% element overlap for a drop to be possible
+	  overlap: 0.75,
+
+	  // listen for drop related events:
+
+	  ondropactivate: function (event) {
+		// add active dropzone feedback
+		//event.target.classList.add('drop-active');
+		console.log("Drop Activate");
+	  },
+	  ondragenter: function (event) {
+		// var draggableElement = event.relatedTarget,
+			// dropzoneElement = event.target;
+
+		// // feedback the possibility of a drop
+		// dropzoneElement.classList.add('drop-target');
+		// draggableElement.classList.add('can-drop');
+		// draggableElement.textContent = 'Dragged in';
+		console.log("Drag Enter")
+	  },
+	  ondragleave: function (event) {
+		// // remove the drop feedback style
+		// event.target.classList.remove('drop-target');
+		// event.relatedTarget.classList.remove('can-drop');
+		// event.relatedTarget.textContent = 'Dragged out';
+		console.log("Drag leave");
+	  },
+	  ondrop: function (event) {
+		//event.relatedTarget.textContent = 'Dropped';
+		console.log("Drop")
+	  },
+	  ondropdeactivate: function (event) {
+		// // remove active dropzone feedback
+		// event.target.classList.remove('drop-active');
+		// event.target.classList.remove('drop-target');
+		console.log("Drop Deactivate");
+	  }
+	});
+	
+	
+	// $( "body" ).droppable({
+		// drop: function( event, ui ) {
+			// ui.draggable.css("top", "0px");
+			// ui.draggable.css("left", "0px");
+		// }
+    // });
+	// $( ".cardSection" ).droppable({
+		// drop: function( event, ui ) {
+			// var sectionDragFrom = parseInt(ui.draggable.parent().attr("id").replace("section","")) - 1;
+			// var sectionDragTo = parseInt($(this).attr("id").replace("section","")) - 1;
+			// if(sectionDragFrom === sectionDragTo) {
+				// clickCard(ui.draggable);
+				// return;
+			// }
 			
-			var isEmpty = true;
-			$(this).children().each(function() {
-				console.log($(this).attr("value"));
-				if($(this).attr("value") !== "") {
-					isEmpty = false;
-				}
-			});
-			if(isEmpty) {
-				var card = sections[sectionDragFrom].shift();
-				sections[sectionDragTo].unshift(card);
-				displayCards();
-				moveList.push("drag|" + ui.draggable.parent().attr("id") + "|" + $(this).attr("id"));
-				checkEndGame();
-				if(window.location.href.indexOf("tutorial") !== -1) {
-					$("#instruction2").text("Great job!");
-					$("#instruction2").show();
-					$('html, body').animate({
-						scrollTop: $("#instruction2").offset().top
-					}, 2000);
-				}
-			} else if(window.location.href.indexOf("tutorial")) {
-				$("#instruction2").text("You cannot drag to a pile unless it is empty.");
-				$("#instruction2").show();
-				$('html, body').animate({
-					scrollTop: $("#instruction2").offset().top
-				}, 2000);
-			}
-		}
-    });
+			// var isEmpty = true;
+			// $(this).children().each(function() {
+				// console.log($(this).attr("value"));
+				// if($(this).attr("value") !== "") {
+					// isEmpty = false;
+				// }
+			// });
+			// if(isEmpty) {
+				// var card = sections[sectionDragFrom].shift();
+				// sections[sectionDragTo].unshift(card);
+				// displayCards();
+				// moveList.push("drag|" + ui.draggable.parent().attr("id") + "|" + $(this).attr("id"));
+				// checkEndGame();
+				// if(window.location.href.indexOf("tutorial") !== -1) {
+					// $("#instruction2").text("Great job!");
+					// $("#instruction2").show();
+					// $('html, body').animate({
+						// scrollTop: $("#instruction2").offset().top
+					// }, 2000);
+				// }
+			// } else if(window.location.href.indexOf("tutorial")) {
+				// $("#instruction2").text("You cannot drag to a pile unless it is empty.");
+				// $("#instruction2").show();
+				// $('html, body').animate({
+					// scrollTop: $("#instruction2").offset().top
+				// }, 2000);
+			// }
+		// }
+    // });
 	
 	$("#undoButton").click(function() {
 		undo();
@@ -101,6 +173,28 @@ $(document).ready(function() {
 	setMinSectionHeight();
 	draw();
 });
+
+
+
+  function dragMoveListener (event) {
+    var target = event.target,
+        // keep the dragged position in the data-x/data-y attributes
+        x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx,
+        y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
+
+    // translate the element
+    target.style.webkitTransform =
+    target.style.transform =
+      'translate(' + x + 'px, ' + y + 'px)';
+
+    // update the posiion attributes
+    target.setAttribute('data-x', x);
+    target.setAttribute('data-y', y);
+  }
+
+  // this is used later in the resizing and gesture demos
+  window.dragMoveListener = dragMoveListener;
+
 
 $(document).on("click", ".card", function(){
 	clickCard($(this));
@@ -165,6 +259,8 @@ function setMinSectionHeight() {
 		});
 	}
 }
+
+
 
 function draw() {
 	if (deck.length > 0) {
