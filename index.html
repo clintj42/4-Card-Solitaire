@@ -1,0 +1,110 @@
+<html>
+	<head>
+		<script src="jquery-1.11.3.min.js"></script>
+		<script src="jquery-ui.min.js"></script>
+		<script src="jquery.ui.touch-punch.min.js"></script>
+		<script src="bootstrap/js/bootstrap.min.js"></script>
+		<script src="fireworks2.js"></script>
+		<script src="script.js"></script>
+		<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="style.css" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+	</head>
+	<body>
+		<div class="topMenu">
+			Wordsearch
+			<div class="lightbulb"><img src="Images/lightbulb.png" /></div>
+		</div>
+		<div class="container">
+			<h1 id="winTitle" style="display:none;">You Win!</h1>
+			<!-- <canvas id="sky" style="display:none;"></canvas> -->
+			<div id="skyContainer">
+			</div>
+			<div>
+				<div id="section1" class="cardSection">
+					<img class="card ui-draggable ui-draggable-handle" value="" src="images/blank.png">
+					<img class="card ui-draggable ui-draggable-handle" value="" src="images/blank.png">
+					<img class="card ui-draggable ui-draggable-handle" value="" src="images/blank.png">
+					<img class="card ui-draggable ui-draggable-handle" value="" src="images/blank.png">
+					<img class="card ui-draggable ui-draggable-handle" value="" src="images/blank.png">
+					<img class="card ui-draggable ui-draggable-handle" value="" src="images/blank.png">
+					<img class="card ui-draggable ui-draggable-handle" value="" src="images/blank.png">
+					<img class="card ui-draggable ui-draggable-handle" value="" src="images/blank.png">
+					<img class="card ui-draggable ui-draggable-handle" value="" src="images/blank.png">
+					<img class="card ui-draggable ui-draggable-handle" value="" src="images/blank.png">
+					<img class="card ui-draggable ui-draggable-handle" value="" src="images/blank.png">
+					<img class="card ui-draggable ui-draggable-handle" value="" src="images/blank.png">
+					<img class="card ui-draggable ui-draggable-handle" value="" src="images/blank.png">
+				</div>
+				<div id="section2" class="cardSection">
+					<img class="card ui-draggable ui-draggable-handle" value="" src="images/blank.png">
+					<img class="card ui-draggable ui-draggable-handle" value="" src="images/blank.png">
+					<img class="card ui-draggable ui-draggable-handle" value="" src="images/blank.png">
+					<img class="card ui-draggable ui-draggable-handle" value="" src="images/blank.png">
+					<img class="card ui-draggable ui-draggable-handle" value="" src="images/blank.png">
+					<img class="card ui-draggable ui-draggable-handle" value="" src="images/blank.png">
+					<img class="card ui-draggable ui-draggable-handle" value="" src="images/blank.png">
+					<img class="card ui-draggable ui-draggable-handle" value="" src="images/blank.png">
+					<img class="card ui-draggable ui-draggable-handle" value="" src="images/blank.png">
+					<img class="card ui-draggable ui-draggable-handle" value="" src="images/blank.png">
+					<img class="card ui-draggable ui-draggable-handle" value="" src="images/blank.png">
+					<img class="card ui-draggable ui-draggable-handle" value="" src="images/blank.png">
+					<img class="card ui-draggable ui-draggable-handle" value="" src="images/blank.png">
+				</div>
+				<div id="section3" class="cardSection">
+					
+					<img class="card ui-draggable ui-draggable-handle" value="" src="images/blank.png">
+					<img class="card ui-draggable ui-draggable-handle" value="" src="images/blank.png">
+					<img class="card ui-draggable ui-draggable-handle" value="" src="images/blank.png">
+					<img class="card ui-draggable ui-draggable-handle" value="" src="images/blank.png">
+					<img class="card ui-draggable ui-draggable-handle" value="" src="images/blank.png">
+					<img class="card ui-draggable ui-draggable-handle" value="" src="images/blank.png">
+					<img class="card ui-draggable ui-draggable-handle" value="" src="images/blank.png">
+					<img class="card ui-draggable ui-draggable-handle" value="" src="images/blank.png">
+					<img class="card ui-draggable ui-draggable-handle" value="" src="images/blank.png">
+					<img class="card ui-draggable ui-draggable-handle" value="" src="images/blank.png">
+					<img class="card ui-draggable ui-draggable-handle" value="" src="images/blank.png">
+					<img class="card ui-draggable ui-draggable-handle" value="" src="images/blank.png">
+					<img class="card ui-draggable ui-draggable-handle" value="" src="images/blank.png">
+				</div>
+				<div id="section4" class="cardSection">
+					
+					<img class="card ui-draggable ui-draggable-handle" value="" src="images/blank.png">
+					<img class="card ui-draggable ui-draggable-handle" value="" src="images/blank.png">
+					<img class="card ui-draggable ui-draggable-handle" value="" src="images/blank.png">
+					<img class="card ui-draggable ui-draggable-handle" value="" src="images/blank.png">
+					<img class="card ui-draggable ui-draggable-handle" value="" src="images/blank.png">
+					<img class="card ui-draggable ui-draggable-handle" value="" src="images/blank.png">
+					<img class="card ui-draggable ui-draggable-handle" value="" src="images/blank.png">
+					<img class="card ui-draggable ui-draggable-handle" value="" src="images/blank.png">
+					<img class="card ui-draggable ui-draggable-handle" value="" src="images/blank.png">
+					<img class="card ui-draggable ui-draggable-handle" value="" src="images/blank.png">
+					<img class="card ui-draggable ui-draggable-handle" value="" src="images/blank.png">
+					<img class="card ui-draggable ui-draggable-handle" value="" src="images/blank.png">
+					<img class="card ui-draggable ui-draggable-handle" value="" src="images/blank.png">
+				</div>
+			</div>
+			<div id="deckContainer">
+				<div id="freeDiscardLabel"></div>
+				<div id="deckCountLabel"></div>
+				<img id="deck" src="images/card_back.jpg" />
+				<div id="newGameButton" class="btn btn-default">New Game</div>
+				<div id="undoButton" class="btn btn-default">Undo Move</div>
+			</div>
+			<div id="playAgainButton" class="btn btn-primary" style="display:none;">Play Again?</div>
+			<div id="loseModal" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4 class="modal-title">You Lose</h4>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" onclick="window.location.reload();">New Game</button>
+							<button type="button" class="btn btn-default" id="modalUndoButton" data-dismiss="modal">Undo Last Move</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

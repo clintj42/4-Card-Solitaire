@@ -1,0 +1,64 @@
+<html>
+	<head>
+		<script src="jquery-1.11.3.min.js"></script>
+		<script src="jquery-ui.min.js"></script>
+		<script src="jquery.ui.touch-punch.min.js"></script>
+		<script src="bootstrap/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="style.css" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+		<script src="script.js"></script>
+		<style>
+			#deck {
+				top: 15px;
+				position: relative;
+			}
+			button {
+				margin:auto;
+				display:block !important;
+				margin-top:20px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="topMenu">
+			<a href="tutorial3.html">
+				<span class="glyphicon glyphicon-chevron-left"></span>
+				Tutorial 4/4
+			</a>
+			<a href="index.html" style="float:right;">Play!<span class="glyphicon glyphicon-chevron-right"></span></a>
+		</div>
+		<div class="container">
+			<div class="instruction">
+				<p>Free Discards</p>
+				<p>Each game you are given 3 "Free Discards". A free discard means you can discard a card whenever you would like.</p>
+				<p>To use a free discard simply tap on the card you want to discard. Note: You cannot discard kings</p>
+				<p>Practice discarding and dragging.</p>
+			</div>
+			
+			<div id="section1" class="cardSection">
+				<img class="card ui-draggable ui-draggable-handle" value="" src="images/blank.png">
+				<img class="card ui-draggable ui-draggable-handle" value="" src="images/blank.png">
+				<img class="card ui-draggable ui-draggable-handle" value="" src="images/blank.png">
+			</div>
+			<div id="section2" class="cardSection">
+				<img class="card ui-draggable ui-draggable-handle" value="" src="images/blank.png">
+				<img class="card ui-draggable ui-draggable-handle" value="" src="images/blank.png">
+				<img class="card ui-draggable ui-draggable-handle" value="" src="images/blank.png">
+			</div>
+			<div id="section3" class="cardSection">
+				<img class="card ui-draggable ui-draggable-handle" value="" src="images/blank.png">
+				<img class="card ui-draggable ui-draggable-handle" value="" src="images/blank.png">
+				<img class="card ui-draggable ui-draggable-handle" value="" src="images/blank.png">
+			</div>
+			<div id="section4" class="cardSection">
+				<img class="card ui-draggable ui-draggable-handle" value="" src="images/blank.png">
+				<img class="card ui-draggable ui-draggable-handle" value="" src="images/blank.png">
+				<img class="card ui-draggable ui-draggable-handle" value="" src="images/blank.png">
+			</div>
+			<img id="deck" src="images/card_back.jpg" />
+			<button type="button" class="btn btn-default" onclick="window.location.reload();">Retry</button>
+			<div id="instruction2" class="instruction" style="display:none;"></div>
+		</div>
+	</body>	
+</html>
