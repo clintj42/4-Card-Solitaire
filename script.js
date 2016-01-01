@@ -374,16 +374,16 @@ function canClick(card) {
 }
 
 function scrollToInstruction() {
-	if($("#instruction2").position()){
-		if($("#instruction2").position().top < $(window).scrollTop()){
-			//scroll up
-			$('html,body').animate({scrollTop:$("#instruction2").position().top}, 1000);
-		}
-		else if($("#instruction2").position().top + $("#instruction2").height() > $(window).scrollTop() + (window.innerHeight || document.documentElement.clientHeight)){
-			//scroll down
-			$('html,body').animate({scrollTop:$("#instruction2").position().top - (window.innerHeight || document.documentElement.clientHeight) + $("#instruction2").height() + 50}, 1000);
-		}
-	}
+	// if($("#instruction2").position()){
+		// if($("#instruction2").position().top < $(window).scrollTop()){
+			// //scroll up
+			// $('html,body').animate({scrollTop:$("#instruction2").position().top}, 1000);
+		// }
+		// else if($("#instruction2").position().top + $("#instruction2").height() > $(window).scrollTop() + (window.innerHeight || document.documentElement.clientHeight)){
+			// //scroll down
+			// $('html,body').animate({scrollTop:$("#instruction2").position().top - (window.innerHeight || document.documentElement.clientHeight) + $("#instruction2").height() + 50}, 1000);
+		// }
+	// }
 }
 
 var Card = function(value, suit) {
