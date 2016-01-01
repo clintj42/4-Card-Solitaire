@@ -124,3 +124,7 @@ canvas {
 	background-color:#d3d3d3;
 	opacity:.5;
 }
+#instruction2 {
+	margin-bottom:15px;
+	min-height:80px;
+}

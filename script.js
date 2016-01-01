@@ -93,66 +93,16 @@ $(document).ready(function() {
 					if(window.location.href.indexOf("tutorial3") !== -1) {
 						$("#instruction2").text("Great job!");
 						$("#instruction2").show();
-						$('html, body').animate({
-							scrollTop: $("#instruction2").offset().top
-						}, 2000);
+						scrollToInstruction();
 					}
 				} else if(window.location.href.indexOf("tutorial") !== -1) {
 					$("#instruction2").text("You cannot drag to a pile unless it is empty.");
 					$("#instruction2").show();
-					$('html, body').animate({
-						scrollTop: $("#instruction2").offset().top
-					}, 2000);
+					scrollToInstruction();
 				}
 			}	
 		}
 	});
-	
-	
-	// $( "body" ).droppable({
-		// drop: function( event, ui ) {
-			// ui.draggable.css("top", "0px");
-			// ui.draggable.css("left", "0px");
-		// }
-    // });
-	// $( ".cardSection" ).droppable({
-		// drop: function( event, ui ) {
-			// var sectionDragFrom = parseInt(ui.draggable.parent().attr("id").replace("section","")) - 1;
-			// var sectionDragTo = parseInt($(this).attr("id").replace("section","")) - 1;
-			// if(sectionDragFrom === sectionDragTo) {
-				// clickCard(ui.draggable);
-				// return;
-			// }
-			
-			// var isEmpty = true;
-			// $(this).children().each(function() {
-				// console.log($(this).attr("value"));
-				// if($(this).attr("value") !== "") {
-					// isEmpty = false;
-				// }
-			// });
-			// if(isEmpty) {
-				// var card = sections[sectionDragFrom].shift();
-				// sections[sectionDragTo].unshift(card);
-				// displayCards();
-				// moveList.push("drag|" + ui.draggable.parent().attr("id") + "|" + $(this).attr("id"));
-				// checkEndGame();
-				// if(window.location.href.indexOf("tutorial") !== -1) {
-					// $("#instruction2").text("Great job!");
-					// $("#instruction2").show();
-					// $('html, body').animate({
-						// scrollTop: $("#instruction2").offset().top
-					// }, 2000);
-				// }
-			// } else if(window.location.href.indexOf("tutorial")) {
-				// $("#instruction2").text("You cannot drag to a pile unless it is empty.");
-				// $("#instruction2").show();
-				// $('html, body').animate({
-					// scrollTop: $("#instruction2").offset().top
-				// }, 2000);
-			// }
-		// }
-    // });
 	
 	$("#undoButton").click(function() {
 		undo();
@@ -264,9 +214,6 @@ function setMinSectionHeight() {
 		$("#section"+(i + 1)+" .card").each(function(index) {
 			if(index !== 0) {
 				$(this).css("margin-top", "-" + cardHeight + "px");
-				if(index === 12 || (window.location.href.indexOf("tutorial3") !== -1 && index === 2) || (window.location.href.indexOf("tutorial4") !== -1 && index === 2)) {
-					//$(this).draggable({ containment: "body", scroll: false });
-				}
 			}
 		});
 	}
@@ -352,9 +299,7 @@ function clickCard(card) {
 				if(window.location.href.indexOf("tutorial4") !== -1) {
 					$("#instruction2").text("Great job. You just used a free discard.");
 					$("#instruction2").show();
-					$('html, body').animate({
-						scrollTop: $("#instruction2").offset().top
-					}, 2000);
+					scrollToInstruction();
 				}
 				freeDiscards--;
 				$("#freeDiscardLabel").text("Free Discards: " + freeDiscards);
@@ -386,16 +331,12 @@ function clickCard(card) {
 		} else if(window.location.href.indexOf("tutorial2") !== -1 || window.location.href.indexOf("tutorial3") !== -1) {
 			$("#instruction2").text("There are no top cards of higher value and the same suit as this card.");
 			$("#instruction2").show();
-			$('html, body').animate({
-				scrollTop: $("#instruction2").offset().top
-			}, 2000);
+			scrollToInstruction();
 		}
 	} else if(window.location.href.indexOf("tutorial") !== -1) {
 		$("#instruction2").text("You can only click on the top cards");
 		$("#instruction2").show();
-		$('html, body').animate({
-			scrollTop: $("#instruction2").offset().top
-		}, 2000);
+		scrollToInstruction();
 	}
 }
 
@@ -417,9 +358,7 @@ function canClick(card) {
 						var newClickedValue = clickedValue === 1 ? "Ace" : clickedValue === 11 ? "Jack" : clickedValue === 12 ? "Queen" : clickedValue === 13 ? "King" : clickedValue;
 						$("#instruction2").text("Great job. The " + newValue + " of " + suit + " cancelled the " + newClickedValue + " of " + clickedSuit);
 						$("#instruction2").show();
-						$('html, body').animate({
-							scrollTop: $("#instruction2").offset().top
-						}, 2000);
+						scrollToInstruction();
 					}
 					ret = true;
 				}
@@ -432,6 +371,19 @@ function canClick(card) {
 	}
 	
 	return ret;
+}
+
+function scrollToInstruction() {
+	if($("#instruction2").position()){
+		if($("#instruction2").position().top < $(window).scrollTop()){
+			//scroll up
+			$('html,body').animate({scrollTop:$("#instruction2").position().top}, 1000);
+		}
+		else if($("#instruction2").position().top + $("#instruction2").height() > $(window).scrollTop() + (window.innerHeight || document.documentElement.clientHeight)){
+			//scroll down
+			$('html,body').animate({scrollTop:$("#instruction2").position().top - (window.innerHeight || document.documentElement.clientHeight) + $("#instruction2").height() + 50}, 1000);
+		}
+	}
 }
 
 var Card = function(value, suit) {
